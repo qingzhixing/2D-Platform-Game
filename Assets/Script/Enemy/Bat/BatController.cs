@@ -37,7 +37,7 @@ public class BatController : MonoBehaviour
             Destroy(gameObject);
         });
 
-        ownEntityController.RegisterOnInjured(() => { CameraShack(); });
+        ownEntityController.RegisterOnInjured((damage) => { CameraShack(); });
         nextPosition.position = GenerateRandomPosition();
     }
 
@@ -47,7 +47,7 @@ public class BatController : MonoBehaviour
         short amount = (short)Random.Range(0, maxItemAmount + 1);
         for (int generated = 1; generated <= amount; generated++)
         {
-            Instantiate(fallingItem, transform.position, Quaternion.identity);
+            Utilities.SetRandomSpeed2D(Instantiate(fallingItem, transform.position, Quaternion.identity), new Vector2(-10, -10), new Vector2(10, 10));
         }
     }
 

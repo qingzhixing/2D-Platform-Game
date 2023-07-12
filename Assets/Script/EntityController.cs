@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 // 用来管理实体的基本属性
@@ -22,7 +23,9 @@ public class EntityController : MonoBehaviour
 
     public bool enableBloodEffect = true;
 
-    public GameObject bloodEffect = null;
+    public bool enableDamageTextEffect = true;
+
+    public Color damageTextColor = Color.red;
 
     private float lastInjuredTime = -10;
 
@@ -33,7 +36,7 @@ public class EntityController : MonoBehaviour
 
     public delegate void DeathHook();
 
-    public delegate void InjuredHook();
+    public delegate void InjuredHook(float damage);
 
     public bool IsDead => currentHealth <= 0;
 
@@ -44,10 +47,10 @@ public class EntityController : MonoBehaviour
 
     public void RegisterOnInjured(InjuredHook onInjured)
     {
-        this.onInjured = () =>
+        this.onInjured = (damage) =>
         {
-            onInjured();
-            OnInjuredEffects();
+            onInjured(damage);
+            OnInjuredEffects(damage);
         };
     }
 
@@ -59,7 +62,7 @@ public class EntityController : MonoBehaviour
 
         if (onInjured != null)
         {
-            onInjured();
+            onInjured(damage);
         }
         else
         {
@@ -67,18 +70,6 @@ public class EntityController : MonoBehaviour
         }
 
         currentHealth -= damage;
-
-        if (IsDead)
-        {
-            if (onDeath != null)
-            {
-                onDeath();
-            }
-            else
-            {
-                onDeath = () => { };
-            }
-        }
     }
 
     private IEnumerator FlashColor()
@@ -96,18 +87,30 @@ public class EntityController : MonoBehaviour
         ownSpriteRenderer.color = originalRenderColor;
     }
 
+    private void DamageTextEffectHandler(float damage)
+    {
+        if (!enableDamageTextEffect) return;
+        if (GameController.Instance.damageTextEffect == null) return;
+        GameObject textEffect = Instantiate(GameController.Instance.damageTextEffect, transform.position, Quaternion.identity);
+        TMP_Text textComponent = textEffect.GetComponent<TMP_Text>();
+        textComponent.text = damage.ToString();
+        textComponent.color = damageTextColor;
+        Utilities.SetRandomSpeed2D(textEffect, new Vector2(-1, -1), new Vector2(1, 1));
+    }
+
     private void BloodEffectHandler()
     {
         if (!enableBloodEffect) return;
-        if (bloodEffect == null) return;
-        Instantiate(bloodEffect, transform);
+        if (GameController.Instance.bloodEffect == null) return;
+        Instantiate(GameController.Instance.bloodEffect, transform.position, Quaternion.identity);
     }
 
     // 受伤特效
-    private void OnInjuredEffects()
+    private void OnInjuredEffects(float damage)
     {
         StartCoroutine(FlashColor());
         BloodEffectHandler();
+        DamageTextEffectHandler(damage);
     }
 
     // Start is called before the first frame update
@@ -118,5 +121,21 @@ public class EntityController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        DeadHandler();
+    }
+
+    private void DeadHandler()
+    {
+        if (IsDead)
+        {
+            if (onDeath != null)
+            {
+                onDeath();
+            }
+            else
+            {
+                onDeath = () => { };
+            }
+        }
     }
 }

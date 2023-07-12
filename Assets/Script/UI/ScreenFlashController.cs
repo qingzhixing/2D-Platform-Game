@@ -12,22 +12,22 @@ public class ScreenFlashController : MonoBehaviour
     {
         IEnumerator StartFlash()
         {
-            Color originalColor = ownImage.color;
+            Color transparent = new Color(1, 1, 1, 0);
             // ÏÔÉ«
             for (float spendTime = 0; spendTime < 0.5 * flashTime; spendTime += Time.deltaTime)
             {
                 yield return new WaitForSeconds(Time.deltaTime);
                 float lerpRate = spendTime / (0.5f * flashTime);
-                ownImage.color = Color.Lerp(originalColor, Color.white, lerpRate * maxAlpha);
+                ownImage.color = Color.Lerp(transparent, Color.white, lerpRate * maxAlpha);
             }
             // ÏûÉ«
             for (float spendTime = 0; spendTime < 0.5 * flashTime; spendTime += Time.deltaTime)
             {
                 yield return new WaitForSeconds(Time.deltaTime);
                 float lerpRate = 1 - (spendTime / (0.5f * flashTime));
-                ownImage.color = Color.Lerp(originalColor, Color.white, lerpRate * maxAlpha);
+                ownImage.color = Color.Lerp(transparent, Color.white, lerpRate * maxAlpha);
             }
-            ownImage.color = originalColor;
+            ownImage.color = transparent;
         }
 
         StartCoroutine(StartFlash());

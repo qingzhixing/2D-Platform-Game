@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject bloodEffect;
+    public GameObject damageTextEffect;
     public ScreenFlashController bindScreenFlash;
+
+    public static GameController Instance => GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
     public void FlashScreen()
     {

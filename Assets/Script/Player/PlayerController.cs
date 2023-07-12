@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
 
     public short currentJumpTimes = 0;
 
-    public GameController bindGameController;
-
     public bool alwaysClimbEnabled = false;
 
     public bool alwaysJumpEnabled = false;
@@ -59,10 +57,10 @@ public class PlayerController : MonoBehaviour
         feetBoxCollider2D = GetComponent<BoxCollider2D>();
         ownEntityController = GetComponent<EntityController>();
         attackChildCollider2D = GetComponentInChildren<PolygonCollider2D>();
-        ownEntityController.RegisterOnInjured(() =>
+        ownEntityController.RegisterOnInjured((damage) =>
         {
             ownAnimator.SetTrigger("Injured");
-            bindGameController.FlashScreen();
+            GameController.Instance.FlashScreen();
         });
         originalGravityScale = ownRigidbody2D.gravityScale;
     }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6395327056086446141}
   - component: {fileID: 384296839915214702}
   - component: {fileID: 4205122981234649357}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Blood Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
