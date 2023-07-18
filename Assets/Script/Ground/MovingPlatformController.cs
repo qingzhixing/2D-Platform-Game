@@ -8,7 +8,7 @@ public class MovingPlatformController : MonoBehaviour
 
     public Transform[] movePositions;
 
-    public MoveDirection moveDirection = MoveDirection.Forward;
+    public Utilities.Direction moveDirection = Utilities.Direction.Forward;
 
     public MoveMode moveMode = MoveMode.LinearLoop;
 
@@ -17,11 +17,6 @@ public class MovingPlatformController : MonoBehaviour
     private float waitedTime = 0;
 
     private Transform originalPlayerParentTransform = null;
-
-    public enum MoveDirection
-    {
-        Forward, Backward
-    }
 
     public enum MoveMode
     {
@@ -56,21 +51,21 @@ public class MovingPlatformController : MonoBehaviour
                 {
                     if (nextPositionId == movePositions.Length - 1)
                     {
-                        moveDirection = MoveDirection.Backward;
+                        moveDirection = Utilities.Direction.Backward;
                     }
                     else if (nextPositionId == 0)
                     {
-                        moveDirection = MoveDirection.Forward;
+                        moveDirection = Utilities.Direction.Forward;
                     }
                 }
-                nextPositionId += (moveDirection == MoveDirection.Forward) ? 1 : -1;
+                nextPositionId += (moveDirection == Utilities.Direction.Forward) ? 1 : -1;
                 if (moveMode == MoveMode.CircleLoop)
                 {
-                    if (nextPositionId >= movePositions.Length && moveDirection == MoveDirection.Forward)
+                    if (nextPositionId >= movePositions.Length && moveDirection == Utilities.Direction.Forward)
                     {
                         nextPositionId = 0;
                     }
-                    else if (nextPositionId <= -1 && moveDirection == MoveDirection.Backward)
+                    else if (nextPositionId <= -1 && moveDirection == Utilities.Direction.Backward)
                     {
                         nextPositionId = movePositions.Length - 1;
                     }

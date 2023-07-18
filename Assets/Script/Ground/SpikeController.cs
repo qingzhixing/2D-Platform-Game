@@ -16,7 +16,7 @@ public class SpikeController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() ==  PlayerController.playerBodyComponentName)
         {
             EntityController otherController = other.GetComponent<EntityController>();
             if (otherController != null)

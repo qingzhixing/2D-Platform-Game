@@ -11,6 +11,8 @@ public class EntityController : MonoBehaviour
 
     public float damage = 1;
 
+    public Utilities.Direction facingDirection = Utilities.Direction.Forward;
+
     public float attackInterval = 0.5f;
 
     public float invincibleTime = 0.5f;
@@ -90,8 +92,8 @@ public class EntityController : MonoBehaviour
     private void DamageTextEffectHandler(float damage)
     {
         if (!enableDamageTextEffect) return;
-        if (GameController.Instance.damageTextEffect == null) return;
-        GameObject textEffect = Instantiate(GameController.Instance.damageTextEffect, transform.position, Quaternion.identity);
+        if (EffectController.Instance.damageTextEffect == null) return;
+        GameObject textEffect = Instantiate(EffectController.Instance.damageTextEffect, transform.position, Quaternion.identity);
         TMP_Text textComponent = textEffect.GetComponent<TMP_Text>();
         textComponent.text = damage.ToString();
         textComponent.color = damageTextColor;
@@ -101,8 +103,8 @@ public class EntityController : MonoBehaviour
     private void BloodEffectHandler()
     {
         if (!enableBloodEffect) return;
-        if (GameController.Instance.bloodEffect == null) return;
-        Instantiate(GameController.Instance.bloodEffect, transform.position, Quaternion.identity);
+        if (EffectController.Instance.bloodEffect == null) return;
+        Instantiate(EffectController.Instance.bloodEffect, transform.position, Quaternion.identity);
     }
 
     //  ‹…ÀÃÿ–ß

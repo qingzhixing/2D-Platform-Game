@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttackController : MonoBehaviour
+public class PlayerNormalAttackController : MonoBehaviour
 {
     // ×é¼þ
 

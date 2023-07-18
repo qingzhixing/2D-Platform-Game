@@ -1,8 +1,11 @@
-using System.Collections;
+using Assets.Script.Entity.Attack;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static string playerBodyComponentName = "UnityEngine.CapsuleCollider2D";
+
     //  Ù–‘
     public float runSpeed = 3;
 
@@ -20,7 +23,9 @@ public class PlayerController : MonoBehaviour
 
     public short coinAmount = 0;
 
-    private bool attackEnabled = true;
+    public GameObject normalAttackObject;
+
+    public GameObject sickelObject;
 
     private float originalGravityScale = 0;
 
@@ -33,7 +38,13 @@ public class PlayerController : MonoBehaviour
 
     private EntityController ownEntityController;
 
-    private Collider2D attackChildCollider2D;
+    private AttackController ownAttackController;
+
+    public static PlayerController Instance => GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+    public static bool PlayerInteracted => Instance.IsAlive && Input.GetButtonDown("Interact");
+
+    public bool IsAlive => !ownEntityController.IsDead;
 
     private bool IsRunning => Mathf.Abs(ownRigidbody2D.velocity.x) > Mathf.Epsilon;
 
@@ -56,13 +67,16 @@ public class PlayerController : MonoBehaviour
         ownAnimator = GetComponent<Animator>();
         feetBoxCollider2D = GetComponent<BoxCollider2D>();
         ownEntityController = GetComponent<EntityController>();
-        attackChildCollider2D = GetComponentInChildren<PolygonCollider2D>();
-        ownEntityController.RegisterOnInjured((damage) =>
-        {
-            ownAnimator.SetTrigger("Injured");
-            GameController.Instance.FlashScreen();
-        });
+        ownAttackController = GetComponent<AttackController>();
+
         originalGravityScale = ownRigidbody2D.gravityScale;
+        ownEntityController.RegisterOnInjured(InjuredHandler);
+
+        ownAttackController.RegisterAttacks(new List<AbstractAttack>
+        {
+            new SickleAttack(gameObject,sickelObject),
+            new PlayerNormalAttack(gameObject,normalAttackObject)
+        });
     }
 
     // Update is called once per frame
@@ -74,6 +88,27 @@ public class PlayerController : MonoBehaviour
         DownOneWayPlatformHandler();
         ClimbLadderHandler();
         AttackHandler();
+        WeaponHandler();
+    }
+
+    private void WeaponHandler()
+    {
+        if (ownEntityController.IsDead) return;
+        if (Input.GetButtonDown("SwitchWeaponRight"))
+        {
+            ownAttackController.SwitchAttack(Utilities.Direction.Forward);
+        }
+        if (Input.GetButtonDown("SwitchWeaponLeft"))
+        {
+            ownAttackController.SwitchAttack(Utilities.Direction.Backward);
+        }
+    }
+
+    private void InjuredHandler(float damage)
+    {
+        ownAnimator.SetTrigger("Injured");
+        EffectController.Instance.FlashScreen();
+        AudioController.PlayPlayerInjured();
     }
 
     private void ClimbLadderHandler()
@@ -87,6 +122,7 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(climbDirection) > 0.5f)
             {
                 ownAnimator.SetBool("Climbing", true);
+                AudioController.PlayPlayerClimb();
                 ownRigidbody2D.gravityScale = 0;
                 ownRigidbody2D.velocity = new Vector2(ownRigidbody2D.velocity.x, climbDirection * climbSpeed);
             }
@@ -114,11 +150,13 @@ public class PlayerController : MonoBehaviour
             {
                 // œÚ”“
                 transform.localRotation = Quaternion.Euler(0, 0, 0);
+                ownEntityController.facingDirection = Utilities.Direction.Forward;
             }
             else if (ownRigidbody2D.velocity.x < -Mathf.Epsilon)
             {
                 // œÚ◊Û
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
+                ownEntityController.facingDirection = Utilities.Direction.Backward;
             }
         }
     }
@@ -152,6 +190,7 @@ public class PlayerController : MonoBehaviour
             if (currentJumpTimes < maxJumpTimes || alwaysJumpEnabled)
             {
                 ownAnimator.SetBool("Jumping", true);
+                AudioController.PlayPlayerJump();
                 ownRigidbody2D.velocity = new Vector2(ownRigidbody2D.velocity.x, jumpSpeed);
                 currentJumpTimes++;
             }
@@ -161,31 +200,9 @@ public class PlayerController : MonoBehaviour
     private void AttackHandler()
     {
         if (ownEntityController.IsDead) return;
-        if (Input.GetButtonDown("Attack") && attackEnabled)
+        if (Input.GetButtonDown("Attack"))
         {
-            attackEnabled = false;
-            ownAnimator.SetTrigger("Attack");
-            StartCoroutine(StartAttack());
-        }
-
-        IEnumerator DisableHitBox()
-        {
-            yield return new WaitForSeconds(0.03f);
-            attackChildCollider2D.enabled = false;
-            StartCoroutine(EnableAttack());
-        }
-
-        IEnumerator StartAttack()
-        {
-            yield return new WaitForSeconds(0.33f);
-            attackChildCollider2D.enabled = true;
-            StartCoroutine(DisableHitBox());
-        }
-
-        IEnumerator EnableAttack()
-        {
-            yield return new WaitForSeconds(ownEntityController.attackInterval);
-            attackEnabled = true;
+            ownAttackController.DoAttack();
         }
     }
 

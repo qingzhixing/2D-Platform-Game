@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class EffectController : MonoBehaviour
 {
     public GameObject bloodEffect;
     public GameObject damageTextEffect;
     public ScreenFlashController bindScreenFlash;
 
-    public static GameController Instance => GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    public static EffectController Instance => GameObject.FindGameObjectWithTag("GameController").GetComponent<EffectController>();
 
     public void FlashScreen()
     {

@@ -1,14 +1,7 @@
 using UnityEngine;
 
-public class SignController : MonoBehaviour
+public class TrashBinTriggerBox : MonoBehaviour
 {
-    public DialogBoxController dialogBox;
-
-    [Multiline(4)]
-    public string signText = "fk U!";
-
-    public bool needInteract = true;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -19,18 +12,11 @@ public class SignController : MonoBehaviour
     {
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
-            if (PlayerController.PlayerInteracted)
-            {
-                dialogBox.Trigger(signText);
-            }
-            else if (!needInteract)
-            {
-                dialogBox.Display(signText);
-            }
+            GetComponentInParent<TrashBinController>().playerEntered = true;
         }
     }
 
@@ -38,7 +24,7 @@ public class SignController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
-            dialogBox.Hide();
+            GetComponentInParent<TrashBinController>().playerEntered = false;
         }
     }
 }
