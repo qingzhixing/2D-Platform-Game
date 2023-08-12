@@ -8,7 +8,7 @@ namespace Assets.Script.Entity.Attack
         private Animator sourceAnimator;
         private PolygonCollider2D bindObjectPolygonCollider2D;
 
-        public PlayerNormalAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, "Player Normal Attack")
+        public PlayerNormalAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, 0.5f, "Player Normal Attack")
         {
             sourceAnimator = source.GetComponent<Animator>();
             bindObjectPolygonCollider2D = bindAttackObject.GetComponent<PolygonCollider2D>();
@@ -36,7 +36,8 @@ namespace Assets.Script.Entity.Attack
 
             IEnumerator EnableAttack()
             {
-                yield return new WaitForSeconds(interval);
+                yield return 0;
+                /*Debug.Log("enbaled Attack");*/
                 enableAttack = true;
             }
         }

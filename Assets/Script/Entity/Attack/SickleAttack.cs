@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SickleAttack : AbstractAttack
 {
-    public SickleAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, "Sickle Attack")
+    public SickleAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, 1f, "Sickle Attack")
     {
     }
 

@@ -19,14 +19,15 @@ namespace Assets.Script.Entity.Attack
 
         private float lastAttackTime = -1e9f;
 
-        public AbstractAttack(GameObject source, GameObject bindAttackObject, string attackName)
+        public AbstractAttack(GameObject source, GameObject bindAttackObject, float interval, string attackName)
         {
             this.source = source;
             this.attackName = attackName;
             this.bindAttackObject = bindAttackObject;
+            this.interval = interval;
         }
 
-        public AbstractAttack(GameObject source, GameObject bindAttackObject) : this(source, bindAttackObject, "No Name Attack")
+        public AbstractAttack(GameObject source, GameObject bindAttackObject, float interval) : this(source, bindAttackObject, interval, "No Name Attack")
         {
         }
 
@@ -34,6 +35,8 @@ namespace Assets.Script.Entity.Attack
 
         public void DoAttack()
         {
+            /*Debug.Log("enbaleAttack: " + enableAttack);*/
+            if (!enableAttack) return;
             if (Time.time - lastAttackTime < interval || !enableAttack) return;
             lastAttackTime = Time.time;
             AttackContent();

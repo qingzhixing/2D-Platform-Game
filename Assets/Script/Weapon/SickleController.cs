@@ -5,7 +5,7 @@ public class SickleController : MonoBehaviour
     public float flySpeed = 10f;
     public float flyTime = 1;
     public float damage = 1.5f;
-    public float rotateSpeed = 30;
+    public float rotateSpeed = 15;
     public float yTuringSpeed = 0.01f;
     public Utilities.Direction direction = Utilities.Direction.Forward;
     private Rigidbody2D ownRigidbody2D;

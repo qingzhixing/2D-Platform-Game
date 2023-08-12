@@ -4,7 +4,7 @@ namespace Assets.Script.Entity.Attack
 {
     internal class EmptyAttack : AbstractAttack
     {
-        public EmptyAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, "Empty Attack")
+        public EmptyAttack(GameObject source, GameObject bindAttackObject) : base(source, bindAttackObject, 0, "Empty Attack")
         {
         }
 
