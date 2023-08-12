@@ -24,6 +24,17 @@ public class SickleController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        MoveHandler();
+        AudioHandler();
+    }
+
+    private void AudioHandler()
+    {
+        AudioController.PlaySickleSpin();
+    }
+
+    private void MoveHandler()
+    {
         transform.Rotate(transform.rotation.x, transform.rotation.y, rotateSpeed);
 
         ownRigidbody2D.velocity -= Vector2.right * flySpeed * (direction == Utilities.Direction.Forward ? 1 : -1) * Time.deltaTime / flyTime;

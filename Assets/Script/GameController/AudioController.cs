@@ -14,15 +14,24 @@ public class AudioController : MonoBehaviour
 
     public AudioClip playerClimb;
 
+    public float climbAudioPlayInterval = 0.3f;
+
     public AudioClip chestOpen;
 
     public AudioClip chestClose;
 
-    public float climbAudioPlayInterval = 0.3f;
+    public AudioClip sickleThrow;
+
+    public AudioClip sickleSpin;
+
+    public float spinAudioPlayInterval = 0.3f;
+
+    public AudioClip denied;
 
     private AudioSource ownAudioSource;
 
     private float lastPlayPlayerClimbTime = -100;
+    private float lastPlaySickleSpinTime = -100;
 
     public static AudioController Instance => GameObject.FindGameObjectWithTag("GameController").GetComponent<AudioController>();
 
@@ -64,6 +73,25 @@ public class AudioController : MonoBehaviour
     public static void PlayChestClose()
     {
         PlayAudio(Instance.chestClose);
+    }
+
+    public static void PlaySickleThrow()
+    {
+        PlayAudio(Instance.sickleThrow);
+    }
+
+    public static void PlayDenied()
+    {
+        PlayAudio(Instance.denied);
+    }
+
+    public static void PlaySickleSpin()
+    {
+        if (Time.time - Instance.lastPlaySickleSpinTime > Instance.spinAudioPlayInterval)
+        {
+            Instance.lastPlaySickleSpinTime = Time.time;
+            PlayAudio(Instance.sickleSpin);
+        }
     }
 
     public static void PlayPlayerClimb()

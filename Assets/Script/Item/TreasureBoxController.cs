@@ -39,8 +39,7 @@ public class TreasureBoxController : MonoBehaviour
     private void InteractionHandler()
     {
         if (!playerEntered || !PlayerController.PlayerInteracted) return;
-        if (isOpen) return;
-        if (enableOpen)
+        if (!isOpen && enableOpen)
         {
             if (ownAnimator != null)
             {
@@ -48,6 +47,10 @@ public class TreasureBoxController : MonoBehaviour
                 GenerateItem();
                 AudioController.PlayChestOpen();
             }
+        }
+        else
+        {
+            AudioController.PlayDenied();
         }
     }
 
