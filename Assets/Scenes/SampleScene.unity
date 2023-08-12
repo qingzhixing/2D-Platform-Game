@@ -31706,6 +31706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19928fcb6dae8e34ca278411998f62f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
 --- !u!224 &1427579435 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5828090201875651418, guid: 6c1b8d7ae93831144bd56ae3e9b136f9, type: 3}
@@ -32053,9 +32054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHelth: 10
   currentHealth: 10
-  damage: 1
   facingDirection: 0
-  attackInterval: 0.5
   invincibleTime: 0.5
   enableInjuredFlash: 0
   flashTime: 0.3
@@ -32920,8 +32919,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.13135004, y: 1.3821499, z: 0}
-    m_Extent: {x: 4.13915, y: 3.93135, z: 0}
+    m_Center: {x: 0.13045001, y: 1.386, z: 0}
+    m_Extent: {x: 4.1286497, y: 3.9408998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0

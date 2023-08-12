@@ -9,11 +9,7 @@ public class EntityController : MonoBehaviour
 
     public float currentHealth = 10;
 
-    public float damage = 1;
-
     public Utilities.Direction facingDirection = Utilities.Direction.Forward;
-
-    public float attackInterval = 0.5f;
 
     public float invincibleTime = 0.5f;
 

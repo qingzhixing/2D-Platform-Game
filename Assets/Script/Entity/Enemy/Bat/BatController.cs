@@ -8,6 +8,10 @@ public class BatController : MonoBehaviour
 
     public float moveWaitTime = 5.0f;
 
+    public float damage = 1;
+
+    public float attackInterval = 0.5f;
+
     public Transform leftDownPositionLimit;
 
     public Transform rightUpPositionLimit;
@@ -17,6 +21,8 @@ public class BatController : MonoBehaviour
     public TrophyController trophyController;
 
     private float waitedTime = 0;
+
+    private float lastAttackTime = -100;
 
     // ×é¼þ
     private EntityController ownEntityController;
@@ -86,10 +92,13 @@ public class BatController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
+            if (Time.time - lastAttackTime <= attackInterval) return;
+            lastAttackTime = Time.time;
+
             EntityController otherController = other.gameObject.GetComponent<EntityController>();
             if (otherController != null)
             {
-                otherController.TakeDamege(ownEntityController.damage);
+                otherController.TakeDamege(damage);
             }
         }
     }

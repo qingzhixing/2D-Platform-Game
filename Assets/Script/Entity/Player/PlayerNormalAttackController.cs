@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class PlayerNormalAttackController : MonoBehaviour
 {
+    public float damage = 1;
     // ×é¼þ
 
     private PolygonCollider2D ownCollider2D;
-
-    private EntityController parentEntityController;
 
     // Start is called before the first frame update
     private void Start()
     {
         ownCollider2D = GetComponent<PolygonCollider2D>();
-        parentEntityController = GetComponentInParent<EntityController>();
     }
 
     // Update is called once per frame
@@ -27,7 +25,7 @@ public class PlayerNormalAttackController : MonoBehaviour
             EntityController otherEntityController = other.GetComponent<EntityController>();
             if (otherEntityController != null)
             {
-                otherEntityController.TakeDamege(parentEntityController.damage);
+                otherEntityController.TakeDamege(damage);
             }
         }
     }
