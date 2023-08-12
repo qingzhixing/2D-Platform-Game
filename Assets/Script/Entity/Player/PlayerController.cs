@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         ownAnimator.SetTrigger("Injured");
         EffectController.Instance.FlashScreen();
-        AudioController.PlayPlayerInjured();
+        AudioControllerHelpers.PlayPlayerInjured();
     }
 
     private void ClimbLadderHandler()
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(climbDirection) > 0.5f)
             {
                 ownAnimator.SetBool("Climbing", true);
-                AudioController.PlayPlayerClimb();
+                AudioControllerHelpers.PlayPlayerClimb();
                 ownRigidbody2D.gravityScale = 0;
                 ownRigidbody2D.velocity = new Vector2(ownRigidbody2D.velocity.x, climbDirection * climbSpeed);
             }
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
             if (currentJumpTimes < maxJumpTimes || alwaysJumpEnabled)
             {
                 ownAnimator.SetBool("Jumping", true);
-                AudioController.PlayPlayerJump();
+                AudioControllerHelpers.PlayPlayerJump();
                 ownRigidbody2D.velocity = new Vector2(ownRigidbody2D.velocity.x, jumpSpeed);
                 currentJumpTimes++;
             }

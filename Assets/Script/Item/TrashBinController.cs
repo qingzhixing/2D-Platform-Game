@@ -29,7 +29,7 @@ public class TrashBinController : MonoBehaviour
             {
                 currentCoinAmount++;
                 player.coinAmount--;
-                AudioController.PlayUseTrashBin();
+                AudioControllerHelpers.PlayUseTrashBin();
             }
             // 投币满再互动触发奖励
             else if (currentCoinAmount >= maxCoinAmount)

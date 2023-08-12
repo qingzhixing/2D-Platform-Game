@@ -27,12 +27,12 @@ public class TreasureBoxController : MonoBehaviour
         if (ownAnimator.GetBool("Opened") == true && isOpen == false)
         {
             ownAnimator.SetBool("Opened", false);
-            AudioController.PlayChestClose();
+            AudioControllerHelpers.PlayChestClose();
         }
         if (ownAnimator.GetBool("Opened") == false && isOpen == true)
         {
             ownAnimator.SetBool("Opened", true);
-            AudioController.PlayChestOpen();
+            AudioControllerHelpers.PlayChestOpen();
         }
     }
 
@@ -45,12 +45,12 @@ public class TreasureBoxController : MonoBehaviour
             {
                 isOpen = true;
                 GenerateItem();
-                AudioController.PlayChestOpen();
+                AudioControllerHelpers.PlayChestOpen();
             }
         }
         else
         {
-            AudioController.PlayDenied();
+            AudioControllerHelpers.PlayDenied();
         }
     }
 

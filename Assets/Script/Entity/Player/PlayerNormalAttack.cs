@@ -24,7 +24,7 @@ namespace Assets.Script.Entity.Attack
             {
                 yield return new WaitForSeconds(0.33f);
                 bindObjectPolygonCollider2D.enabled = true;
-                AudioController.PlayPlayerAttack();
+                AudioControllerHelpers.PlayPlayerAttack();
                 Utilities.StartCoroutine(DisableHitBox(), 0.1f);
             }
             IEnumerator DisableHitBox()

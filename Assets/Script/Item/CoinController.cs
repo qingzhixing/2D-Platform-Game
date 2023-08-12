@@ -18,7 +18,7 @@ public class CoinController : MonoBehaviour
         if (player != null)
         {
             player.coinAmount++;
-            AudioController.PlayPickCoin();
+            AudioControllerHelpers.PlayPickCoin();
             Destroy(gameObject);
         }
     }

@@ -22002,8 +22002,9 @@ MonoBehaviour:
   trophyController:
     trophies:
     - trophyItem: {fileID: 8473355139564631705, guid: 46bbf89ee4bed014e9800f0b469ba804, type: 3}
-      minItemGenerateAmount: 5
-      maxItemGenerateAmount: 10
+      itemAmontRange:
+        min: 10
+        max: 15
       generateRate: 1
 --- !u!95 &395675495
 Animator:
@@ -22397,6 +22398,16 @@ MonoBehaviour:
   sickleSpin: {fileID: 8300000, guid: a0f8161e2dcc3a34c9a9618ab5b4df11, type: 3}
   spinAudioPlayInterval: 0.3
   denied: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  batDeath: {fileID: 8300000, guid: 82b4f8a5508cd0f4c9fd8bcb2eea0654, type: 3}
+  batHurt1: {fileID: 8300000, guid: fddd081d05f36f54ea8abb7e22be5301, type: 3}
+  batHurt2: {fileID: 8300000, guid: 51bc20c43e4d3d541818ed094904f492, type: 3}
+  batIdle1: {fileID: 8300000, guid: 7deadc9e80d24024594afd9559a97892, type: 3}
+  batIdle2: {fileID: 8300000, guid: 5971ece90fc64d2488eb9c09aa2b2510, type: 3}
+  batIdle3: {fileID: 8300000, guid: 23d95a0222c16204d8c1ea9a85d2302b, type: 3}
+  batIdle4: {fileID: 8300000, guid: 93889a0123bd180449e6adcec7554883, type: 3}
+  batFly: {fileID: 8300000, guid: c6e4aa4227a7a5a4aa534e539a433105, type: 3}
+  batFlyVolumnScale: 0.2
+  globalAudioSource: {fileID: 0}
 --- !u!1001 &548989839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33093,8 +33104,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.12514997, y: 1.3818499, z: 0}
-    m_Extent: {x: 4.1356497, y: 3.93895, z: 0}
+    m_Center: {x: 0.12715006, y: 1.38935, z: 0}
+    m_Extent: {x: 4.13015, y: 3.9372501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -33955,6 +33966,14 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9040081567987316135, guid: 5fa2b2ed57fce16479414dfbba74dc03, type: 3}
+      propertyPath: trophyController.trophies.Array.data[0].itemAmontRange.max
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040081567987316135, guid: 5fa2b2ed57fce16479414dfbba74dc03, type: 3}
+      propertyPath: trophyController.trophies.Array.data[0].itemAmontRange.min
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040081567987316135, guid: 5fa2b2ed57fce16479414dfbba74dc03, type: 3}
       propertyPath: trophyController.trophies.Array.data[0].maxItemGenerateAmount
       value: 15
       objectReference: {fileID: 0}
@@ -33975,10 +33994,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1761902009490547432, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
-      propertyPath: trophyController.trophies.Array.data[0].trophyItem
-      value: 
-      objectReference: {fileID: 8473355139564631705, guid: 46bbf89ee4bed014e9800f0b469ba804, type: 3}
     - target: {fileID: 3193761612476667948, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
       propertyPath: m_Name
       value: Bat

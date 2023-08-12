@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 
 public class BatController : MonoBehaviour
@@ -20,6 +21,10 @@ public class BatController : MonoBehaviour
 
     public TrophyController trophyController;
 
+    public Range<float> batChripRange;
+
+    private float chripInterval;
+
     private float waitedTime = 0;
 
     private float lastAttackTime = -100;
@@ -38,11 +43,26 @@ public class BatController : MonoBehaviour
         ownEntityController.RegisterOnDeath(() =>
         {
             GenerateFallingItem();
+            AudioControllerHelpers.PlayBatDeath();
             Destroy(gameObject);
         });
 
-        ownEntityController.RegisterOnInjured((damage) => { CameraShack(); });
+        ownEntityController.RegisterOnInjured((damage) =>
+        {
+            CameraShack();
+            AudioControllerHelpers.PlayRandomBatHurt();
+        });
         nextPosition.position = GenerateRandomPosition();
+
+        chripInterval = Random.Range(batChripRange.min, batChripRange.max);
+        StartCoroutine(Chrip());
+    }
+
+    private IEnumerator Chrip()
+    {
+        yield return new WaitForSeconds(chripInterval);
+        AudioControllerHelpers.PlayRandomBatIdle();
+        chripInterval = Random.Range(batChripRange.min, batChripRange.max);
     }
 
     private void GenerateFallingItem()
@@ -71,6 +91,7 @@ public class BatController : MonoBehaviour
             if (waitedTime >= moveWaitTime)
             {
                 nextPosition.position = GenerateRandomPosition();
+                AudioControllerHelpers.PlayBatFly();
                 waitedTime = 0;
             }
             else

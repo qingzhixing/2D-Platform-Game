@@ -30,7 +30,7 @@ public class SickleController : MonoBehaviour
 
     private void AudioHandler()
     {
-        AudioController.PlaySickleSpin();
+        AudioControllerHelpers.PlaySickleSpin();
     }
 
     private void MoveHandler()
