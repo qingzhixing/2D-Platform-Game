@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 
     public bool alwaysJumpEnabled = false;
 
+    public bool enableInfiniteCoin = false;
+
     public short coinAmount = 0;
 
     public GameObject normalAttackObject;
@@ -89,6 +91,15 @@ public class PlayerController : MonoBehaviour
         ClimbLadderHandler();
         AttackHandler();
         WeaponHandler();
+        CoinHandler();
+    }
+
+    private void CoinHandler()
+    {
+        if (enableInfiniteCoin && this.coinAmount < 9999)
+        {
+            this.coinAmount = 9999;
+        }
     }
 
     private void WeaponHandler()

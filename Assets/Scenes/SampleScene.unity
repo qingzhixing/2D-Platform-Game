@@ -32035,6 +32035,7 @@ MonoBehaviour:
   currentJumpTimes: 0
   alwaysClimbEnabled: 0
   alwaysJumpEnabled: 0
+  enableInfiniteCoin: 0
   coinAmount: 0
   normalAttackObject: {fileID: 1427266318}
   sickelObject: {fileID: 2694975742713720503, guid: 72c22799e3fe5994ebba9777eb3ba005, type: 3}
@@ -32919,8 +32920,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.12709999, y: 1.3901501, z: 0}
-    m_Extent: {x: 4.1325, y: 3.93825, z: 0}
+    m_Center: {x: 0.13135004, y: 1.3821499, z: 0}
+    m_Extent: {x: 4.13915, y: 3.93135, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
