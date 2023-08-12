@@ -266,11 +266,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   moveWaitTime: 5
-  maxItemAmount: 10
-  fallingItem: {fileID: 8473355139564631705, guid: 46bbf89ee4bed014e9800f0b469ba804, type: 3}
   leftDownPositionLimit: {fileID: 5335461643965771901}
   rightUpPositionLimit: {fileID: 60710929013239402}
   nextPosition: {fileID: 6364434276453790799}
+  trophyController:
+    trophies:
+    - trophyItem: {fileID: 0}
+      minItemGenerateAmount: 5
+      maxItemGenerateAmount: 10
+      generateRate: 1
 --- !u!114 &2042620837458365806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +290,7 @@ MonoBehaviour:
   maxHelth: 3
   currentHealth: 3
   damage: 1
+  facingDirection: 0
   attackInterval: 2
   invincibleTime: 0.3
   enableInjuredFlash: 1

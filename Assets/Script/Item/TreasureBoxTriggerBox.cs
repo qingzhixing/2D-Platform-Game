@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class TrashBinTriggerBox : MonoBehaviour
+public class TreasureBoxTriggerBox : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
-            GetComponentInParent<TrashBinController>().playerEntered = true;
+            GetComponentInParent<TreasureBoxController>().playerEntered = true;
         }
     }
 
@@ -14,7 +14,7 @@ public class TrashBinTriggerBox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
-            GetComponentInParent<TrashBinController>().playerEntered = false;
+            GetComponentInParent<TreasureBoxController>().playerEntered = false;
         }
     }
 }

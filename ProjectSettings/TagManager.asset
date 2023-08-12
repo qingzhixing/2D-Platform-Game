@@ -54,6 +54,9 @@ TagManager:
   - name: Ladder
     uniqueID: 903045369
     locked: 0
+  - name: UncollidableItem
+    uniqueID: 967299247
+    locked: 0
   - name: Item
     uniqueID: 967364553
     locked: 0

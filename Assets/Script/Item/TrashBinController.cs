@@ -7,6 +7,8 @@ public class TrashBinController : MonoBehaviour
     public short maxCoinAmount = 10;
     public short currentCoinAmount = 0;
 
+    public TrophyController trophyController = null;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -14,6 +16,11 @@ public class TrashBinController : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
+    {
+        InteractionHandler();
+    }
+
+    private void InteractionHandler()
     {
         if (playerEntered && PlayerController.PlayerInteracted)
         {
@@ -23,6 +30,12 @@ public class TrashBinController : MonoBehaviour
                 currentCoinAmount++;
                 player.coinAmount--;
                 AudioController.PlayUseTrashBin();
+            }
+            // 投币满再互动触发奖励
+            else if (currentCoinAmount >= maxCoinAmount)
+            {
+                currentCoinAmount = 0;
+                trophyController.GenerateTrophies(gameObject);
             }
         }
     }

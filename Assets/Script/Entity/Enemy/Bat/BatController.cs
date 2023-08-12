@@ -8,15 +8,13 @@ public class BatController : MonoBehaviour
 
     public float moveWaitTime = 5.0f;
 
-    public short maxItemAmount = 3;
-
-    public GameObject fallingItem;
-
     public Transform leftDownPositionLimit;
 
     public Transform rightUpPositionLimit;
 
     public Transform nextPosition;
+
+    public TrophyController trophyController;
 
     private float waitedTime = 0;
 
@@ -43,12 +41,8 @@ public class BatController : MonoBehaviour
 
     private void GenerateFallingItem()
     {
-        if (fallingItem == null) return;
-        short amount = (short)Random.Range(0, maxItemAmount + 1);
-        for (int generated = 1; generated <= amount; generated++)
-        {
-            Utilities.SetRandomSpeed2D(Instantiate(fallingItem, transform.position, Quaternion.identity), new Vector2(-10, -10), new Vector2(10, 10));
-        }
+        if (trophyController == null) return;
+        trophyController.GenerateTrophies(gameObject);
     }
 
     private void CameraShack()
@@ -90,7 +84,7 @@ public class BatController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() ==  PlayerController.playerBodyComponentName)
+        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
             EntityController otherController = other.gameObject.GetComponent<EntityController>();
             if (otherController != null)

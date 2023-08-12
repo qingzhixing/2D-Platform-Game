@@ -14,6 +14,10 @@ public class AudioController : MonoBehaviour
 
     public AudioClip playerClimb;
 
+    public AudioClip chestOpen;
+
+    public AudioClip chestClose;
+
     public float climbAudioPlayInterval = 0.3f;
 
     private AudioSource ownAudioSource;
@@ -50,6 +54,16 @@ public class AudioController : MonoBehaviour
     public static void PlayPlayerAttack()
     {
         PlayAudio(Instance.playerAttack);
+    }
+
+    public static void PlayChestOpen()
+    {
+        PlayAudio(Instance.chestOpen);
+    }
+
+    public static void PlayChestClose()
+    {
+        PlayAudio(Instance.chestClose);
     }
 
     public static void PlayPlayerClimb()
