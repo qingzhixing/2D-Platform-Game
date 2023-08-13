@@ -6,7 +6,6 @@ public static class AudioControllerHelpers
 
     private static float lastPlayPlayerClimbTime = -100;
     private static float lastPlaySickleSpinTime = -100;
-    private static float lastPlayBatLoopTime = -100;
 
     public static void PlayBatDeath() => AudioController.PlayAudio(Instance.batDeath);
 

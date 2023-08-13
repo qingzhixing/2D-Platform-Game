@@ -10,8 +10,7 @@ public class BombController : MonoBehaviour
 
     public float deleteTime = 1.2f;
 
-    // 爆炸声音播放延迟
-    public float explodeAudioPlayDelay = 0.5f;
+    public GameObject explosionRange;
 
     private float timer;
 
@@ -19,31 +18,26 @@ public class BombController : MonoBehaviour
 
     private Animator ownAnimator;
 
-    private bool isExploded = false;
-
     // Start is called before the first frame update
     private void Start()
     {
         ownRigidbody = GetComponent<Rigidbody2D>();
         ownAnimator = GetComponent<Animator>();
 
-        ownRigidbody.velocity = transform.right * initSpeed.x + transform.up * initSpeed.y;
-
-        StartCoroutine(PlayBombFuse());
+        StartCoroutine(DelayInitialize());
     }
 
-    private IEnumerator PlayBombFuse()
+    private IEnumerator DelayInitialize()
     {
-        // 防止在AudioController还没构造完成时调用播放音乐的功能
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(Time.deltaTime);
         AudioControllerHelpers.PlayBombFuse();
+        ownRigidbody.velocity = transform.right * initSpeed.x + transform.up * initSpeed.y;
     }
 
     // Update is called once per frame
     private void Update()
     {
         CountdownHandler();
-        ExplodeHandler();
         AnimationHandler();
     }
 
@@ -63,26 +57,16 @@ public class BombController : MonoBehaviour
         }
     }
 
+    // 由帧事件调用
     private void ExplodeHandler()
     {
-        if (timer < explodeCountdown) return;
-        if (!isExploded)
-        {
-            isExploded = true;
-            StartCoroutine(PlayBombExplode());
-            StartCoroutine(Explode());
-        }
-    }
-
-    private IEnumerator PlayBombExplode()
-    {
-        yield return new WaitForSeconds(explodeAudioPlayDelay);
         AudioControllerHelpers.PlayBombExplode();
+        Instantiate(explosionRange, transform.position, Quaternion.identity);
     }
 
-    private IEnumerator Explode()
+    // 由帧事件调用
+    private void DeleteBomb()
     {
-        yield return new WaitForSeconds(deleteTime);
         Destroy(gameObject);
     }
 

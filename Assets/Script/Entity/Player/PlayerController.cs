@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject sickelObject;
 
+    public GameObject bombObject;
+
     private float originalGravityScale = 0;
 
     // ×é¼þ
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
         ownAttackController.RegisterAttacks(new List<AbstractAttack>
         {
             new SickleAttack(gameObject,sickelObject),
+            new BombAttack(gameObject,bombObject),
             new PlayerNormalAttack(gameObject,normalAttackObject)
         });
     }

@@ -23,6 +23,8 @@ public class BatController : MonoBehaviour
 
     public Range<float> batChripRange;
 
+    public bool isStatic = false;
+
     private float chripInterval;
 
     private float waitedTime = 0;
@@ -84,6 +86,7 @@ public class BatController : MonoBehaviour
 
     private void MoveHandler()
     {
+        if (isStatic) return;
         transform.position = Vector2.MoveTowards(transform.position, nextPosition.position, moveSpeed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, nextPosition.position) < Mathf.Epsilon)
@@ -109,9 +112,9 @@ public class BatController : MonoBehaviour
             );
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.GetType().ToString() == PlayerController.playerBodyComponentName)
+        if (other.gameObject.CompareTag("Player") && other.collider.GetType().ToString() == PlayerController.playerBodyComponentName)
         {
             if (Time.time - lastAttackTime <= attackInterval) return;
             lastAttackTime = Time.time;

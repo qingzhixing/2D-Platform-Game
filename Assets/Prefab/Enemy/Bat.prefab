@@ -33,7 +33,7 @@ Transform:
   - {fileID: 60710929013239402}
   - {fileID: 6364434276453790799}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3369123993089528674
 GameObject:
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 1761902009490547432}
   - component: {fileID: 2042620837458365806}
   - component: {fileID: 1112428900019756291}
+  - component: {fileID: 9064888784937543744}
   m_Layer: 8
   m_Name: Enemy Bat
   m_TagString: Enemy
@@ -236,7 +237,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.028385073, y: -0.062915206}
@@ -281,6 +282,7 @@ MonoBehaviour:
   batChripRange:
     min: 5
     max: 10
+  isStatic: 1
 --- !u!114 &2042620837458365806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +358,33 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -0.56, z: 0}
+--- !u!50 &9064888784937543744
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497745497433946221}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &8502131133192705197
 GameObject:
   m_ObjectHideFlags: 0
