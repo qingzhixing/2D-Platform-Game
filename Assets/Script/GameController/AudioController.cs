@@ -46,6 +46,10 @@ public class AudioController : MonoBehaviour
 
     public float batFlyVolumnScale = 0.2f;
 
+    public AudioClip bombFuse;
+
+    public AudioClip bombExplode;
+
     public AudioSource globalAudioSource;
 
     public static AudioController Instance => GameObject.FindGameObjectWithTag("GameController").GetComponent<AudioController>();

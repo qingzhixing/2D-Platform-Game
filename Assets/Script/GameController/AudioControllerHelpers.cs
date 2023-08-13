@@ -56,6 +56,10 @@ public static class AudioControllerHelpers
 
     public static void PlayBatFly() => Instance.globalAudioSource.PlayOneShot(Instance.batFly, Instance.batFlyVolumnScale);
 
+    public static void PlayBombFuse() => AudioController.PlayAudio(Instance.bombFuse);
+
+    public static void PlayBombExplode() => AudioController.PlayAudio(Instance.bombExplode);
+
     public static void PlayRandomBatIdle()
     {
         switch ((int)Random.Range(1, 4 + 1))
