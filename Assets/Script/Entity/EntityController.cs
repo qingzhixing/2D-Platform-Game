@@ -140,6 +140,10 @@ public class EntityController : MonoBehaviour
 
     private void DeadHandler()
     {
+        if (enabelInvincible && currentHealth <= 0)
+        {
+            currentHealth = 0.01f;
+        }
         if (IsDead)
         {
             if (onDeath != null)
