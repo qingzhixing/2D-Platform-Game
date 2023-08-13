@@ -32072,6 +32072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHelth: 10
   currentHealth: 10
+  enabelInvincible: 0
   facingDirection: 0
   invincibleTime: 0.5
   enableInjuredFlash: 0
@@ -32937,8 +32938,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.12985015, y: 1.3805, z: 0}
-    m_Extent: {x: 4.13855, y: 3.934, z: 0}
+    m_Center: {x: 0.13319993, y: 1.3772, z: 0}
+    m_Extent: {x: 4.1398, y: 3.9320998, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -33827,6 +33828,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2042620837458365806, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
+      propertyPath: flashColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042620837458365806, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
+      propertyPath: flashColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042620837458365806, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
+      propertyPath: flashColor.r
+      value: 0.08116722
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042620837458365806, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
+      propertyPath: enabelInvincible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3193761612476667948, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
       propertyPath: m_Name
       value: Bat
@@ -33873,10 +33890,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849201186707079361, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5613228020339359772, guid: 12d9cba3a51c3c54ea6c96210d2ac0c1, type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -9,6 +9,8 @@ public class EntityController : MonoBehaviour
 
     public float currentHealth = 10;
 
+    public bool enabelInvincible = false;
+
     public Utilities.Direction facingDirection = Utilities.Direction.Forward;
 
     public float invincibleTime = 0.5f;
@@ -31,6 +33,12 @@ public class EntityController : MonoBehaviour
     private DeathHook onDeath;
 
     private InjuredHook onInjured;
+
+    private SpriteRenderer ownSpriteRenderer;
+
+    private Color originalRenderColor;
+
+    private Coroutine flashColorCoroutine;
 
     public delegate void DeathHook();
 
@@ -68,14 +76,16 @@ public class EntityController : MonoBehaviour
         }
 
         currentHealth -= damage;
+
+        if (enabelInvincible && currentHealth <= 0)
+        {
+            currentHealth = 0.01f;
+        }
     }
 
     private IEnumerator FlashColor()
     {
         if (!enableInjuredFlash) yield break;
-
-        SpriteRenderer ownSpriteRenderer = GetComponent<SpriteRenderer>();
-        Color originalRenderColor = ownSpriteRenderer.color;
         for (float spendTime = 0; spendTime < flashTime; spendTime += Time.deltaTime)
         {
             yield return new WaitForSeconds(Time.deltaTime);
@@ -106,7 +116,11 @@ public class EntityController : MonoBehaviour
     // ÊÜÉËÌØÐ§
     private void OnInjuredEffects(float damage)
     {
-        StartCoroutine(FlashColor());
+        if (flashColorCoroutine != null)
+        {
+            StopCoroutine(flashColorCoroutine);
+        }
+        flashColorCoroutine = StartCoroutine(FlashColor());
         BloodEffectHandler();
         DamageTextEffectHandler(damage);
     }
@@ -114,6 +128,8 @@ public class EntityController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        ownSpriteRenderer = GetComponent<SpriteRenderer>();
+        originalRenderColor = ownSpriteRenderer.color;
     }
 
     // Update is called once per frame

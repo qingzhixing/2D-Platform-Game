@@ -33,7 +33,7 @@ Transform:
   - {fileID: 60710929013239402}
   - {fileID: 6364434276453790799}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3369123993089528674
 GameObject:
@@ -282,7 +282,7 @@ MonoBehaviour:
   batChripRange:
     min: 5
     max: 10
-  isStatic: 1
+  isStatic: 0
 --- !u!114 &2042620837458365806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHelth: 3
   currentHealth: 3
+  enabelInvincible: 0
   facingDirection: 0
   invincibleTime: 0.3
   enableInjuredFlash: 1
