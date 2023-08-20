@@ -5,7 +5,7 @@ public class SickleController : MonoBehaviour
     public float flySpeed = 10f;
     public float flyTime = 1;
     public float damage = 1.5f;
-    public float rotateSpeed = 15;
+    public float rotateSpeed = 30;
     public float yTuringSpeed = 0.01f;
     public Utilities.Direction direction = Utilities.Direction.Forward;
     private Rigidbody2D ownRigidbody2D;
@@ -47,7 +47,7 @@ public class SickleController : MonoBehaviour
         }
 
         // Forward判断飞回0.5f,Backward判断飞到前面0.5f,没飞过之前二者乘积均为负数
-        if ((transform.position.x - playerTransfrom.position.x) * (direction == Utilities.Direction.Forward ? -1 : 1) > 20 * flySpeed * Time.deltaTime)
+        if ((transform.position.x - playerTransfrom.position.x) * (direction == Utilities.Direction.Forward ? -1 : 1) > flySpeed * Time.deltaTime)
         {
             // 飞过头
             Destroy(gameObject);
